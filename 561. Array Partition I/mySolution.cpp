@@ -1,0 +1,38 @@
+class Solution {
+public:
+    void swap(int &a, int &b){
+        int temp;
+        temp = a;
+        a = b;
+        b = temp;
+    }
+    
+    int partition(vector<int>& nums, int low, int high){
+        int key = nums[low];
+        while(low<high){
+            while(low<high && nums[high] >= key) --high;
+            this->swap(nums[low], nums[high]);
+            while(low<high && nums[low] <= key) ++low;
+            this->swap(nums[low], nums[high]);
+        }
+        return low;
+    }
+    
+    void quickSort(vector<int>& nums, int low, int high){
+        if(low<high){
+            int key = this->partition(nums, low, high);
+            this->quickSort(nums, low, key-1);
+            this->quickSort(nums, key+1, high);
+        }
+    }
+
+    int arrayPairSum(vector<int>& nums) {
+        this->quickSort(nums, 0, nums.size()-1);
+        int result = 0;
+        for(int i=0;i<nums.size();i=i+2){
+            result = result + nums[i];
+        }
+        return result;
+    }
+    
+};
