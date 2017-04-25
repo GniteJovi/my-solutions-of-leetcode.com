@@ -1,12 +1,14 @@
 Problem link: https://leetcode.com/problems/array-partition-i/#/description
 
-Given an array of 2n integers, your task is to group these integers into n pairs of integer, 
-say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
+Problem description:
+==
+Given an array of 2n integers, your task is to group these integers into n pairs of integer, say (a1, b1), (a2, b2), ..., (an, bn) which makes sum of min(ai, bi) for all i from 1 to n as large as possible.
 
 Example:
+----
 Input: [1,4,3,2]
 
-Output: 4
+Output: 4<br>
 Explanation: n is 2, and the maximum sum of pairs is 4.
 
 Note:
@@ -14,7 +16,8 @@ Note:
 2. All the integers in the array will be in the range of [-10000, 10000].
 
 Provided solution:
-
+==
+```c++
 class Solution {
 public:
     int arrayPairSum(vector<int>& nums) {
@@ -27,3 +30,4 @@ public:
         return summin;
     }
 };
+```
