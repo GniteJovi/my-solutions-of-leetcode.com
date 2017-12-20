@@ -1,0 +1,66 @@
+Problem link: https://leetcode.com/problems/add-two-numbers/description/
+
+#### My Code
+
+```c++
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* temp1 = l1;
+        ListNode* temp2 = l2;
+        ListNode* result = new ListNode(-1);
+        ListNode* rtemp = result;
+        int upNum = 0;
+        while (temp1 || temp2) {
+            if (temp1) {
+                if (temp2) {
+                    if (result->val == -1) {
+                        result->val = (temp1->val + temp2->val) % 10;
+                        upNum = (temp1->val + temp2->val) / 10;
+                        temp1 = temp1->next;
+                        temp2 = temp2->next;
+                    } else {
+                        rtemp->next = new ListNode((temp1->val + temp2->val + upNum) % 10);
+                        upNum = (temp1->val + temp2->val + upNum) / 10;
+                        rtemp = rtemp->next;
+                        temp1 = temp1->next;
+                        temp2 = temp2->next;
+                    }
+                } else {
+                    if (result->val == -1) {
+                        result->val = temp1->val;
+                        temp1 = temp1->next;
+                    } else {
+                        rtemp->next= new ListNode((temp1->val + upNum) % 10);
+                        upNum = (temp1->val + upNum) / 10;
+                        rtemp = rtemp->next;
+                        temp1 = temp1->next;
+                    }
+                }   
+            } else {
+                if (result->val == -1) {
+                    result->val = temp2->val;
+                    temp2 = temp2->next;
+                } else {
+                    rtemp->next= new ListNode((temp2->val + upNum) % 10);
+                    upNum = (temp2->val + upNum) / 10;
+                    rtemp = rtemp->next;
+                    temp2 = temp2->next;
+                }
+            }
+        }
+        if (upNum != 0) {
+            rtemp->next = new ListNode(1);
+        }
+        return result;
+    }
+};
+```
